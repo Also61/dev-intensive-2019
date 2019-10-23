@@ -24,7 +24,14 @@ fun Date.format(pattern:String="HH:mm:ss dd.MM.yy"):String{
     val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
     return dateFormat.format(this)
 }
-
+fun Date.getMinute(pattern: String="mm"):String{
+    val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
+    return dateFormat.format(this)
+}
+fun Date.getSecond(pattern: String="ss"):String{
+    val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
+    return dateFormat.format(this)
+}
 fun Date.add(value:Int, units: TimeUnits = TimeUnits.SECOND):Date{
     var time = this.time
 
@@ -38,8 +45,17 @@ fun Date.add(value:Int, units: TimeUnits = TimeUnits.SECOND):Date{
 
     this.time = time
 
+
     return this
 }
+
 fun Date.humanizeDiff():String{
-TODO()
+
+
+
+
+
+return ""
+
+
 }
