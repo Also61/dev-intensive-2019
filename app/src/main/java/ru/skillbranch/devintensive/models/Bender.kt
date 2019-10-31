@@ -20,7 +20,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
            else ->  if (question.answers.contains(answer)) {
                 question = question.nextQuestion()
                 "Отлично - ты справился\n${question.question}" to status.color
-            }else if(wrong == 3){
+            }else if(wrong > 3){
                wrong = 0
 
                question = Question.NAME
