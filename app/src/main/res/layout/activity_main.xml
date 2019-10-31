@@ -59,5 +59,6 @@
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/spacing_normal_16"
             android:layout_marginRight="@dimen/spacing_normal_16"/>
+
     </LinearLayout>
 </LinearLayout>
