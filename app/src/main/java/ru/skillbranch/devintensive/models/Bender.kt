@@ -12,15 +12,63 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                 Question.IDLE -> Question.IDLE.question
     }
 
+    fun checkAnswer(answer:String): Pair<String, Triple<Int,Int,Int>>{
+       return when (question) {
+            Question.IDLE -> {question.nextQuestion()
+            question.question to status.color}
+
+           else ->  if (question.answers.contains(answer)) {
+                question = question.nextQuestion()
+                "Отлично  -  это правильный ответ\n${question.question}" to status.color
+            } else {
+                status = status.nextStatus()
+                "Это не правильный ответ\n${question.question}" to status.color
+            }
+        }
+    }
+
     fun listenAnswer(answer:String): Pair<String, Triple<Int,Int,Int>>{
 
-        return if(question.answers.contains(answer)){
-            question = question.nextQuestion()
-                "Отлично  -  это правильный ответ\n${question.question}" to status.color
-            }else{
-            status = status.nextStatus()
-            "Это не правильный ответ\n${question.question}" to status.color
-        }
+     return when(question){
+         Question.NAME -> if(answer[0].isLetter() && answer[0].isUpperCase()) checkAnswer(answer)
+         else  {"Имя должно начинаться с заглавной буквы" to status.color}
+
+         Question.PROFESSION -> if(answer[0].isLetter() && answer[0].isLowerCase()) checkAnswer(answer)
+         else {"Профессия должна начинаться со строчной буквы" to status.color }
+
+         Question.MATERIAL ->  {
+             var check:Boolean = true
+             answer.forEach {
+                 if(it.isDigit()){
+                     check = false
+                 }
+             }
+             if(!check){"Материал не должен содержать цифр" to status.color } else checkAnswer(answer)
+         }
+
+         Question.BDAY -> {
+             var check:Boolean = true
+
+             answer.forEach {
+                 if(!it.isDigit()){
+                     check = false
+                 }
+             }
+             if(check) checkAnswer(answer) else {"Год моего рождения должен содержать только цифры" to status.color}
+         }
+
+         Question.SERIAL -> {
+             var check:Boolean = true
+
+             answer.forEach {
+                 if(!it.isDigit()){
+                     check = false
+                 }
+             }
+             if(check && answer.length == 7) checkAnswer(answer)  else {"Серийный номер содержит только цифры, и их 7" to status.color}
+         }
+         else -> checkAnswer(answer)
+     }
 
 
     }
@@ -42,13 +90,13 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
     }
 
     enum class Question(val question: String,val answers:List<String>){
-        NAME("Как меня зовут?", listOf("бендер","bender")){
+        NAME("Как меня зовут?", listOf("Бендер","Bender")){
             override fun nextQuestion(): Question = PROFESSION
         },
         PROFESSION("Назови мою профессию", listOf("сгибальщик","bender")){
             override fun nextQuestion(): Question = MATERIAL
         },
-        MATERIAL("Из чего я сделан?", listOf("металл","дерево","iron","metal","wood")){
+        MATERIAL("Из чего я сделан?", listOf("металл","дерево","iron","metal","wood","Металл","Дерево","Iron","Metal","Wood")){
             override fun nextQuestion(): Question = BDAY
         },
         BDAY("Когда меня создали?", listOf("2993")){
