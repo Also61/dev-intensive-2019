@@ -20,13 +20,18 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
            else ->  if (question.answers.contains(answer)) {
                 question = question.nextQuestion()
                 "Отлично - ты справился\n${question.question}" to status.color
-            } else {
+            }else if(wrong == 3){
+               "то неправильный ответ. Давай все по новой\n${Question.NAME.question}" to Status.NORMAL.color
+           }
+           else {
                 status = status.nextStatus()
+                wrong = wrong + 1
                 "Это неправильный ответ\n${question.question}" to status.color
             }
         }
     }
 
+    var wrong = 0
     fun listenAnswer(answer:String): Pair<String, Triple<Int,Int,Int>>{
 
      return when(question){
@@ -69,7 +74,8 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                  }
              }
              if(check && answer.length == 7) checkAnswer(answer)  else {"Серийный номер содержит только цифры, и их 7\n" +
-                     "${question.question}" to status.color}
+                     "${question.question}" to status.color
+             }
          }
          else -> checkAnswer(answer)
      }
