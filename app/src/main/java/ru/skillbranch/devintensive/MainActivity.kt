@@ -1,12 +1,9 @@
 package ru.skillbranch.devintensive
 
-import android.app.Activity
-import android.content.res.Configuration
+
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.media.Image
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -19,16 +16,16 @@ import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.models.Bender
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-    lateinit var benderImage: ImageView
-    lateinit var textTxt: TextView
-    lateinit var messageEt: EditText
-    lateinit var sendBtn: ImageView
+    private lateinit var benderImage: ImageView
+    private lateinit var textTxt: TextView
+    private lateinit var messageEt: EditText
+    private lateinit var sendBtn: ImageView
 
-    lateinit var benderObj: Bender
+    private lateinit  var benderObj: Bender
 
 
     override fun onClick(v: View?){
-        if(v?.id==R.id.b_send) {
+        if(v?.id==R.id.iv_send) {
             val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
             messageEt.setText("")
             val (r, g, b) = color
@@ -46,7 +43,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         benderImage = iv_bender
         textTxt = tv_text
         messageEt = et_message
-        sendBtn = b_send
+        sendBtn = iv_send
 
         val status = savedInstanceState?.getString("STATUS") ?: Bender.Status.NORMAL.name
         val question = savedInstanceState?.getString("QUESTION") ?: Bender.Question.NAME.name
@@ -59,7 +56,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         textTxt.text = benderObj.askQuestion()
         sendBtn.setOnClickListener(this)
 
-        messageEt.setOnEditorActionListener { v, actionId, event ->
+        messageEt.setOnEditorActionListener { _, actionId, _ ->
             when(actionId){
                 EditorInfo.IME_ACTION_DONE -> sendBtn.callOnClick()
                 else -> false

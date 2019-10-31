@@ -12,7 +12,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                 Question.IDLE -> Question.IDLE.question
     }
 
-    fun checkAnswer(answer:String): Pair<String, Triple<Int,Int,Int>>{
+    private fun checkAnswer(answer:String): Pair<String, Triple<Int,Int,Int>>{
        return when (question) {
             Question.IDLE -> {question.nextQuestion()
             question.question to status.color}
@@ -37,7 +37,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
          else {"Профессия должна начинаться со строчной буквы" to status.color }
 
          Question.MATERIAL ->  {
-             var check:Boolean = true
+             var check = true
              answer.forEach {
                  if(it.isDigit()){
                      check = false
@@ -47,7 +47,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
          }
 
          Question.BDAY -> {
-             var check:Boolean = true
+             var check = true
 
              answer.forEach {
                  if(!it.isDigit()){
@@ -58,7 +58,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
          }
 
          Question.SERIAL -> {
-             var check:Boolean = true
+             var check = true
 
              answer.forEach {
                  if(!it.isDigit()){
@@ -78,7 +78,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         NORMAL(Triple(255,255,255)),
         WARNING(Triple(255,120,0)),
         DANGER(Triple(255,60,60)),
-        CRITICLAL(Triple(255,255,0));
+        CRITICLAL(Triple(255,0,0));
 
         fun nextStatus(): Status {
             return if(this.ordinal< values().lastIndex){
