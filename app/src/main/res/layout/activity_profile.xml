@@ -236,7 +236,6 @@
             android:layout_marginRight="@dimen/spacing_normal_16"
             android:layout_marginLeft="@dimen/spacing_normal_16">
 
-
             <EditText
                 style="@style/Profile.EditText.Single"
                 android:id="@+id/et_repository"
