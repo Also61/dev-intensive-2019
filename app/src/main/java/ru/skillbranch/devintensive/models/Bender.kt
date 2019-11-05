@@ -21,7 +21,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                 question = question.nextQuestion()
                 "Отлично - ты справился\n${question.question}" to status.color
 
-            }else if(wrong > 3){
+            }else if(wrong == 3){
                wrong = 0
 
                question = Question.NAME
@@ -30,7 +30,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
            }
            else {
                 status = status.nextStatus()
-                wrong = wrong + 1
+                wrong++
                 "Это неправильный ответ\n${question.question}" to status.color
             }
         }
@@ -39,51 +39,61 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
     var wrong = 0
     fun listenAnswer(answer:String): Pair<String, Triple<Int,Int,Int>>{
 
-     return when(question){
-         Question.NAME -> if(answer[0].isLetter() && answer[0].isUpperCase()) checkAnswer(answer)
-         else  {"Имя должно начинаться с заглавной буквы\n${question.question}" to status.color}
+            return when (question) {
+                Question.NAME -> if (answer[0].isLetter() && answer[0].isUpperCase()) checkAnswer(answer)
+                else {
+                    "Имя должно начинаться с заглавной буквы\n${question.question}" to status.color
+                }
 
-         Question.PROFESSION -> if(answer[0].isLetter() && answer[0].isLowerCase()) checkAnswer(answer)
-         else {"Профессия должна начинаться со строчной буквы\n" +
-                 "${question.question}" to status.color }
+                Question.PROFESSION -> if (answer[0].isLetter() && answer[0].isLowerCase()) checkAnswer(answer)
+                else {
+                    "Профессия должна начинаться со строчной буквы\n" +
+                            "${question.question}" to status.color
+                }
 
-         Question.MATERIAL ->  {
-             var check = true
-             answer.forEach {
-                 if(it.isDigit()){
-                     check = false
-                 }
-             }
-             if(!check){"Материал не должен содержать цифр\n" +
-                     "${question.question}" to status.color } else checkAnswer(answer)
-         }
+                Question.MATERIAL -> {
+                    var check = true
+                    answer.forEach {
+                        if (it.isDigit()) {
+                            check = false
+                        }
+                    }
+                    if (!check) {
+                        "Материал не должен содержать цифр\n" +
+                                "${question.question}" to status.color
+                    } else checkAnswer(answer)
+                }
 
-         Question.BDAY -> {
-             var check = true
+                Question.BDAY -> {
+                    var check = true
 
-             answer.forEach {
-                 if(!it.isDigit()){
-                     check = false
-                 }
-             }
-             if(check) checkAnswer(answer) else {"Год моего рождения должен содержать только цифры\n" +
-                     "${question.question}" to status.color}
-         }
+                    answer.forEach {
+                        if (!it.isDigit()) {
+                            check = false
+                        }
+                    }
+                    if (check) checkAnswer(answer) else {
+                        "Год моего рождения должен содержать только цифры\n" +
+                                "${question.question}" to status.color
+                    }
+                }
 
-         Question.SERIAL -> {
-             var check = true
+                Question.SERIAL -> {
+                    var check = true
 
-             answer.forEach {
-                 if(!it.isDigit()){
-                     check = false
-                 }
-             }
-             if(check && answer.length == 7) checkAnswer(answer)  else {"Серийный номер содержит только цифры, и их 7\n" +
-                     "${question.question}" to status.color
-             }
-         }
-         else -> checkAnswer(answer)
-     }
+                    answer.forEach {
+                        if (!it.isDigit()) {
+                            check = false
+                        }
+                    }
+                    if (check && answer.length == 7) checkAnswer(answer) else {
+                        "Серийный номер содержит только цифры, и их 7\n" +
+                                "${question.question}" to status.color
+                    }
+                }
+                else -> checkAnswer(answer)
+            }
+
 
 
     }
