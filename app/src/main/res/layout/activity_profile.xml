@@ -26,6 +26,7 @@
             android:layout_marginBottom="@dimen/font_normal_16">
 
             <ImageButton
+                android:id="@+id/btn_edit"
                 android:layout_width="@dimen/btn_round_size_40"
                 android:layout_height="@dimen/btn_round_size_40"
                 android:background="@drawable/btn_round_bg"
@@ -51,7 +52,7 @@
 
             <TextView
                 style="@style/Profile.Header.Nickname"
-                android:id="@+id/tv_name"
+                android:id="@+id/tv_nick_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv_avatar"
@@ -62,7 +63,7 @@
                 android:id="@+id/tv_rank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_name"
+                android:layout_below="@id/tv_nick_name"
                 android:layout_centerHorizontal="true"
                 android:text="Junior Android Developer"/>
         </RelativeLayout>
@@ -81,6 +82,7 @@
             android:paddingBottom="@dimen/font_normal_16"
             android:paddingTop="@dimen/font_normal_16">
             <TextView
+                android:id="@+id/tv_raiting"
                 style="@style/Profile.Metrics.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,6 +112,7 @@
             android:paddingBottom="@dimen/font_normal_16">
 
             <TextView
+                android:id="@+id/tv_respect"
                 style="@style/Profile.Metrics.Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -181,8 +184,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/color_divider_dark"
-        android:layout_marginLeft="@dimen/spacing_normal_16"
-        android:layout_marginRight="@dimen/spacing_normal_16"/>
+        android:layout_marginLeft="72dp" />
 
     <LinearLayout
         style='@style/Profile.InfoItem'
@@ -198,9 +200,11 @@
             android:src="@drawable/ic_about"/>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/wr_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing_normal_16">
+            android:layout_marginLeft="@dimen/spacing_normal_16"
+            app:counterMaxLength="128">
 
             <EditText
                 style="@style/Profile.EditText.MultiLine"
@@ -216,7 +220,11 @@
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_divider_dark"
+        android:layout_marginLeft="72dp" />
     <LinearLayout
         style="@style/Profile.InfoItem"
         android:layout_width="match_parent"
@@ -234,7 +242,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginRight="@dimen/spacing_normal_16"
             android:layout_marginLeft="@dimen/spacing_normal_16">
 
             <EditText
@@ -252,6 +259,8 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
+            android:layout_marginLeft="@dimen/spacing_normal_16"
+            android:id="@+id/ic_eye"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_eye_24dp"
