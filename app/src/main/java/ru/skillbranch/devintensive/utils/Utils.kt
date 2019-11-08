@@ -88,7 +88,7 @@ object Utils {
                 "Ю" -> translitName +="Yu"
                 "Я" -> translitName +="Ya"
                 " " -> translitName += divider
-                else -> translitName += ""
+                else -> translitName += i.toString()
             }
         }
         return translitName

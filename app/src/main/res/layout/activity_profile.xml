@@ -35,13 +35,13 @@
                 android:layout_toRightOf="@id/iv_avatar"
                 android:layout_marginLeft="@dimen/spacing_huge_32" />
 
-            <ImageView
+            <ru.skillbranch.devintensive.ui.custom.CircleImageView
                 android:id="@+id/iv_avatar"
                 android:layout_width="@dimen/avatar_round_size"
                 android:layout_height="@dimen/avatar_round_size"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/avatar_default" />
-            <ImageButton
+            <ImageView
                 android:id="@+id/btn_switch_theme"
                 android:layout_width="@dimen/btn_round_size_40"
                 android:layout_height="@dimen/btn_round_size_40"
@@ -240,7 +240,9 @@
             android:src="@drawable/ic_repo"/>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/wr_repository"
             android:layout_width="0dp"
+            app:errorEnabled="true"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginLeft="@dimen/spacing_normal_16">

@@ -4,6 +4,8 @@ import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -27,6 +29,8 @@ class ProfileActivity : AppCompatActivity(){
     private lateinit var viewModel: ProfileViewModel
     var isEditMode = false
     lateinit var viewFields : Map<String, TextView>
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,6 +92,7 @@ class ProfileActivity : AppCompatActivity(){
         }
     }
 
+
     private fun showCurrentMode(isEdit: Boolean) {
 
         val info = viewFields.filter{ setOf("firstName","lastName","about","repository" ).contains(it.key)}
@@ -137,9 +142,20 @@ class ProfileActivity : AppCompatActivity(){
     }
 
 
+    private fun validateInputRepo(){
+
+        //et_repository.addTextChangedListener
+
+    }
+
+
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         outState?.putBoolean(IS_EDIT_MODE, isEditMode)
     }
+
+
+
+
 
 }
